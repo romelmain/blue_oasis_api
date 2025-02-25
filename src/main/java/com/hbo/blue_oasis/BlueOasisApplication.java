@@ -40,29 +40,20 @@ public class BlueOasisApplication {
                                         .name("DELETE")
                                         .build();
 
-                        PermissionEntity refactorPermission = PermissionEntity.builder()
-                                        .name("REFACTOR")
-                                        .build();
-
                         /* Create Roles */
                         RoleEntity roleAdmin = RoleEntity.builder()
                                         .roleEnum(RoleEnum.ADMIN)
                                         .permissionList(Set.of(createPermission, readPermission, updatePermission,
                                                         deletePermission))
                                         .build();
-                        RoleEntity roleUser = RoleEntity.builder()
-                                        .roleEnum(RoleEnum.USER)
+                        RoleEntity roleGuest = RoleEntity.builder()
+                                        .roleEnum(RoleEnum.GUEST)
                                         .permissionList(Set.of(createPermission, readPermission))
                                         .build();
-                        RoleEntity roleInvited = RoleEntity.builder()
-                                        .roleEnum(RoleEnum.INVITED)
-                                        .permissionList(Set.of(readPermission))
-                                        .build();
-                        RoleEntity roleDeveloper = RoleEntity.builder()
-                                        .roleEnum(RoleEnum.DEVELOPER)
+                        RoleEntity roleFrontDesk = RoleEntity.builder()
+                                        .roleEnum(RoleEnum.FRONTDESK)
                                         .permissionList(Set.of(createPermission, readPermission, updatePermission,
-                                                        deletePermission,
-                                                        refactorPermission))
+                                                        deletePermission))
                                         .build();
 
                         /* Create Users */
@@ -83,7 +74,7 @@ public class BlueOasisApplication {
                                         .accountNoExpired(true)
                                         .accountNoLocked(true)
                                         .credentialNoExpired(true)
-                                        .roles(Set.of(roleUser))
+                                        .roles(Set.of(roleGuest))
                                         .build();
 
                         UserEntity userAndrea = UserEntity.builder()
@@ -93,7 +84,7 @@ public class BlueOasisApplication {
                                         .accountNoExpired(true)
                                         .accountNoLocked(true)
                                         .credentialNoExpired(true)
-                                        .roles(Set.of(roleInvited))
+                                        .roles(Set.of(roleFrontDesk))
                                         .build();
 
                         UserEntity userAnyi = UserEntity.builder()
@@ -103,7 +94,7 @@ public class BlueOasisApplication {
                                         .accountNoExpired(true)
                                         .accountNoLocked(true)
                                         .credentialNoExpired(true)
-                                        .roles(Set.of(roleDeveloper))
+                                        .roles(Set.of(roleGuest))
                                         .build();
 
                         userRepository.saveAll(List.of(userRomel, userJuan, userAndrea, userAnyi));
