@@ -15,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.hbo.blue_oasis.Util.JwtUtils;
@@ -26,6 +27,11 @@ import com.hbo.blue_oasis.service.UserDetailServiceImpl;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    private static final String[] WHITE_LIST_URL = { "/api/v1/auth/**", "/v2/api-docs", "/v3/api-docs",
+            "/v3/api-docs/**", "/swagger-resources", "/swagger-resources/**", "/configuration/ui",
+            "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html", "/api/auth/**",
+            "/api/test/**", "/auth" };
+
     @Autowired
     private JwtUtils jwtUtils;
 
@@ -34,6 +40,7 @@ public class SecurityConfig {
             throws Exception {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
+
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(http -> {
                     // EndPoints publicos
@@ -45,7 +52,9 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.DELETE, "/method/delete").hasAuthority("DELETE");
                     http.requestMatchers(HttpMethod.PUT, "/method/put").hasAuthority("UPDATE");
 
-                    http.anyRequest().denyAll();
+                    http.requestMatchers(WHITE_LIST_URL).permitAll().anyRequest().authenticated();
+                    // http.anyRequest().denyAll();
+
                 })
                 .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)
                 .build();
