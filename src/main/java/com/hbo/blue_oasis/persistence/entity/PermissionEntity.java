@@ -33,6 +33,9 @@ public class PermissionEntity implements Serializable {
     @Column(unique = true, nullable = false, updatable = false)
     private String name;
 
+    @Column(nullable = false, updatable = false)
+    private Boolean menu;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles = new HashSet<>();

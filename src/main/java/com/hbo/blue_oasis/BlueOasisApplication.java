@@ -24,36 +24,63 @@ public class BlueOasisApplication {
         CommandLineRunner init(UserRepository userRepository) {
                 return args -> {
                         /* Crate Permissions */
-                        PermissionEntity createPermission = PermissionEntity.builder()
-                                        .name("CREATE")
+                        PermissionEntity roomsPermission = PermissionEntity.builder()
+                                        .name("ROOMS")
+                                        .menu(true)
                                         .build();
 
-                        PermissionEntity readPermission = PermissionEntity.builder()
-                                        .name("READ")
+                        PermissionEntity bookingPermission = PermissionEntity.builder()
+                                        .name("BOOKING")
+                                        .menu(false)
                                         .build();
 
-                        PermissionEntity updatePermission = PermissionEntity.builder()
-                                        .name("UPDATE")
+                        PermissionEntity roomDetailsPermission = PermissionEntity.builder()
+                                        .name("ROOM DETAILS")
+                                        .menu(false)
                                         .build();
 
-                        PermissionEntity deletePermission = PermissionEntity.builder()
-                                        .name("DELETE")
+                        PermissionEntity paymentPermission = PermissionEntity.builder()
+                                        .name("PAYMENT")
+                                        .menu(false)
+                                        .build();
+
+                        PermissionEntity bookingDetailsPermission = PermissionEntity.builder()
+                                        .name("BOOKING DETAILS")
+                                        .menu(false)
+                                        .build();
+
+                        PermissionEntity bookingsPermission = PermissionEntity.builder()
+                                        .name("BOOKINGS")
+                                        .menu(true)
+                                        .build();
+
+                        PermissionEntity checkInPermission = PermissionEntity.builder()
+                                        .name("CHECK IN")
+                                        .menu(false)
+                                        .build();
+
+                        PermissionEntity checkOutPermission = PermissionEntity.builder()
+                                        .name("CHECKOUT")
+                                        .menu(false)
                                         .build();
 
                         /* Create Roles */
                         RoleEntity roleAdmin = RoleEntity.builder()
                                         .roleEnum(RoleEnum.ADMIN)
-                                        .permissionList(Set.of(createPermission, readPermission, updatePermission,
-                                                        deletePermission))
+                                        .permissionList(Set.of(roomsPermission, roomDetailsPermission,
+                                                        bookingPermission, bookingDetailsPermission, bookingsPermission,
+                                                        paymentPermission, checkInPermission, checkOutPermission))
                                         .build();
                         RoleEntity roleGuest = RoleEntity.builder()
                                         .roleEnum(RoleEnum.GUEST)
-                                        .permissionList(Set.of(createPermission, readPermission))
+                                        .permissionList(Set.of(roomsPermission, roomDetailsPermission,
+                                                        bookingPermission, bookingDetailsPermission, paymentPermission))
                                         .build();
                         RoleEntity roleFrontDesk = RoleEntity.builder()
                                         .roleEnum(RoleEnum.FRONTDESK)
-                                        .permissionList(Set.of(createPermission, readPermission, updatePermission,
-                                                        deletePermission))
+                                        .permissionList(Set.of(roomsPermission, roomDetailsPermission,
+                                                        bookingDetailsPermission, bookingsPermission,
+                                                        checkInPermission, checkOutPermission))
                                         .build();
 
                         /* Create Users */
