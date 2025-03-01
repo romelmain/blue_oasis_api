@@ -27,6 +27,7 @@ public class BlueOasisApplication {
                         PermissionEntity roomsPermission = PermissionEntity.builder()
                                         .name("ROOMS")
                                         .menu(true)
+                                        .path("/prueba")
                                         .build();
 
                         PermissionEntity bookingPermission = PermissionEntity.builder()
@@ -46,12 +47,14 @@ public class BlueOasisApplication {
 
                         PermissionEntity bookingDetailsPermission = PermissionEntity.builder()
                                         .name("BOOKING DETAILS")
-                                        .menu(false)
+                                        .menu(true)
+                                        .path("/prueba")
                                         .build();
 
                         PermissionEntity bookingsPermission = PermissionEntity.builder()
                                         .name("BOOKINGS")
                                         .menu(true)
+                                        .path("/prueba")
                                         .build();
 
                         PermissionEntity checkInPermission = PermissionEntity.builder()
