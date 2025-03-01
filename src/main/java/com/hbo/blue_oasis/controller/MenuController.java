@@ -19,6 +19,7 @@ public class MenuController {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping()
     public ResponseEntity<?> getMenu(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
 
