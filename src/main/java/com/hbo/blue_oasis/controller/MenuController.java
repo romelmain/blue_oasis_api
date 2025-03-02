@@ -36,7 +36,7 @@ public class MenuController {
                 authorities = jwtUtils.getAuthorities(decodedJWT, token);
                 role = jwtUtils.getRole(decodedJWT, token);
                 System.out.println("Role: " + role);
-                menu = new MenuResponse(username, role, authorities);
+                menu = new MenuResponse(username, role, null);
             }
 
             return new ResponseEntity<>(menu, HttpStatus.OK);
