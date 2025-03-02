@@ -8,9 +8,17 @@ import org.springframework.web.bind.annotation.*;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.hbo.blue_oasis.Util.JwtUtils;
 import com.hbo.blue_oasis.controller.dto.MenuResponse;
-import java.util.ArrayList;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.hbo.blue_oasis.persistence.entity.PermissionEntity;
+import com.hbo.blue_oasis.service.PermissionService;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @RestController
 @RequestMapping("/menu")
 @Tag(name = "Menu Operations", description = "Controller for Menu Operations")
@@ -18,6 +26,8 @@ public class MenuController {
 
     @Autowired
     private JwtUtils jwtUtils;
+
+    private final PermissionService permissionService;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping()
@@ -27,6 +37,8 @@ public class MenuController {
         String username = null;
         String role = null;
         MenuResponse menu = null;
+        Optional<ArrayList<PermissionEntity>> oPermissionList = null;
+        ArrayList<PermissionEntity> permissionEntityList = null;
         try {
             if (token != null) {
                 token = token.substring(7);
@@ -36,10 +48,21 @@ public class MenuController {
                 authorities = jwtUtils.getAuthorities(decodedJWT, token);
                 role = jwtUtils.getRole(decodedJWT, token);
                 System.out.println("Role: " + role);
-                menu = new MenuResponse(username, role, null);
+
+                oPermissionList = permissionService.getPermissionsPath(authorities);
+                if (oPermissionList.isPresent()) {
+
+                    System.out.println("----------------------------------");
+                    permissionEntityList = oPermissionList.get();
+
+                } else {
+                    System.out.println("No Entities");
+                }
+
+                // menu = new MenuResponse(username, role, null);
             }
 
-            return new ResponseEntity<>(menu, HttpStatus.OK);
+            return new ResponseEntity<>(permissionEntityList, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -1,5 +1,9 @@
 package com.hbo.blue_oasis.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.hbo.blue_oasis.persistence.entity.PermissionEntity;
@@ -13,28 +17,28 @@ public class PermissionService {
 
     private final PermissionRepository permissionRepository;
 
-    /*
-     * public Optional<PermissionEntity> getPermissionsPath(){
-     * 
-     * }
-     */
+    public PermissionService(PermissionRepository permissionRepository) {
+        this.permissionRepository = permissionRepository;
+    }
 
-    /*
-     * public Optional<Cart> getCartByUserId(Integer userId) {
-     * Cart cart = new Cart();
-     * Optional<Cart> oCart;
-     * try {
-     * cart = cartRepository.validateCart(userId);
-     * if (cart != null) {
-     * oCart = Optional.of(cart);
-     * } else {
-     * oCart = Optional.empty();
-     * }
-     * } catch (Exception e) {
-     * oCart = Optional.empty();
-     * }
-     * return oCart;
-     * }
-     */
+    public Optional<ArrayList<PermissionEntity>> getPermissionsPath(List<String> authorities) {
+        ArrayList<PermissionEntity> permissionEntityList = null;
+        Optional<ArrayList<PermissionEntity>> oPermissionList;
+        try {
+            permissionEntityList = permissionRepository.getPermissionsPath(authorities);
+            if (permissionEntityList.size() > 0) {
+                System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
+                oPermissionList = Optional.of(permissionEntityList);
+            } else {
+                System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBB");
+                oPermissionList = Optional.empty();
+            }
+        } catch (Exception e) {
+            System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCC");
+            System.out.println(e.getMessage());
+            oPermissionList = Optional.empty();
+        }
+        return oPermissionList;
+    }
 
 }
