@@ -14,6 +14,7 @@ import com.hbo.blue_oasis.service.PermissionService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.ToDoubleBiFunction;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -54,6 +55,8 @@ public class MenuController {
 
                     System.out.println("----------------------------------");
                     permissionEntityList = oPermissionList.get();
+                    // TODO: Falta agregar el DTO menu
+                    // y hay que hacerlo con el //Patron bukder
 
                 } else {
                     System.out.println("No Entities");
