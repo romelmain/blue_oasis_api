@@ -24,10 +24,16 @@ public class BlueOasisApplication {
         CommandLineRunner init(UserRepository userRepository) {
                 return args -> {
                         /* Crate Permissions */
+                        PermissionEntity homePermission = PermissionEntity.builder()
+                                        .name("HOME")
+                                        .menu(true)
+                                        .path("/")
+                                        .build();
+
                         PermissionEntity roomsPermission = PermissionEntity.builder()
                                         .name("ROOMS")
                                         .menu(true)
-                                        .path("/prueba")
+                                        .path("/rooms")
                                         .build();
 
                         PermissionEntity bookingPermission = PermissionEntity.builder()
@@ -48,13 +54,13 @@ public class BlueOasisApplication {
                         PermissionEntity bookingDetailsPermission = PermissionEntity.builder()
                                         .name("BOOKING DETAILS")
                                         .menu(true)
-                                        .path("/prueba")
+                                        .path("/booking-details")
                                         .build();
 
                         PermissionEntity bookingsPermission = PermissionEntity.builder()
                                         .name("BOOKINGS")
                                         .menu(true)
-                                        .path("/prueba")
+                                        .path("/bookings")
                                         .build();
 
                         PermissionEntity checkInPermission = PermissionEntity.builder()
@@ -67,23 +73,30 @@ public class BlueOasisApplication {
                                         .menu(false)
                                         .build();
 
+                        PermissionEntity logOutPermission = PermissionEntity.builder()
+                                        .name("LOGOUT")
+                                        .menu(false)
+                                        .build();
+
                         /* Create Roles */
                         RoleEntity roleAdmin = RoleEntity.builder()
                                         .roleEnum(RoleEnum.ADMIN)
-                                        .permissionList(Set.of(roomsPermission, roomDetailsPermission,
+                                        .permissionList(Set.of(homePermission, roomsPermission, roomDetailsPermission,
                                                         bookingPermission, bookingDetailsPermission, bookingsPermission,
-                                                        paymentPermission, checkInPermission, checkOutPermission))
+                                                        paymentPermission, checkInPermission, checkOutPermission,
+                                                        logOutPermission))
                                         .build();
                         RoleEntity roleGuest = RoleEntity.builder()
                                         .roleEnum(RoleEnum.GUEST)
-                                        .permissionList(Set.of(roomsPermission, roomDetailsPermission,
-                                                        bookingPermission, bookingDetailsPermission, paymentPermission))
+                                        .permissionList(Set.of(homePermission, roomsPermission, roomDetailsPermission,
+                                                        bookingPermission, bookingDetailsPermission, paymentPermission,
+                                                        logOutPermission))
                                         .build();
                         RoleEntity roleFrontDesk = RoleEntity.builder()
                                         .roleEnum(RoleEnum.FRONTDESK)
-                                        .permissionList(Set.of(roomsPermission, roomDetailsPermission,
+                                        .permissionList(Set.of(homePermission, roomsPermission, roomDetailsPermission,
                                                         bookingDetailsPermission, bookingsPermission,
-                                                        checkInPermission, checkOutPermission))
+                                                        checkInPermission, checkOutPermission, logOutPermission))
                                         .build();
 
                         /* Create Users */
