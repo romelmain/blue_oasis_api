@@ -7,15 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.hbo.blue_oasis.Util.JwtUtils;
+import com.hbo.blue_oasis.controller.dto.Menu;
 import com.hbo.blue_oasis.controller.dto.MenuResponse;
 import com.hbo.blue_oasis.persistence.entity.PermissionEntity;
 import com.hbo.blue_oasis.service.PermissionService;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.function.ToDoubleBiFunction;
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
@@ -37,7 +34,8 @@ public class MenuController {
         ArrayList<String> authorities = null;
         String username = null;
         String role = null;
-        MenuResponse menu = null;
+        ArrayList<Menu> menuList = new ArrayList<Menu>();
+        MenuResponse menuResponse = null;
         Optional<ArrayList<PermissionEntity>> oPermissionList = null;
         ArrayList<PermissionEntity> permissionEntityList = null;
         try {
@@ -53,19 +51,22 @@ public class MenuController {
                 oPermissionList = permissionService.getPermissionsPath(authorities);
                 if (oPermissionList.isPresent()) {
 
-                    System.out.println("----------------------------------");
                     permissionEntityList = oPermissionList.get();
                     // TODO: Falta agregar el DTO menu
                     // y hay que hacerlo con el //Patron bukder
-
+                    for (PermissionEntity permission : permissionEntityList) {
+                        Menu menu = new Menu(permission.getName(), permission.getPath());
+                        menuList.add(menu);
+                    }
+                    menuResponse = new MenuResponse(username, role, menuList);
                 } else {
+
                     System.out.println("No Entities");
                 }
 
-                // menu = new MenuResponse(username, role, null);
             }
 
-            return new ResponseEntity<>(permissionEntityList, HttpStatus.OK);
+            return new ResponseEntity<>(menuResponse, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
