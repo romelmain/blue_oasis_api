@@ -25,7 +25,8 @@ public class AuthenticationController {
     @Autowired
     private UserDetailServiceImpl userDetailService;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    // @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = { "http://localhost:4200", "http://127.0.0.1:5500" })
     @PostMapping("sign-up")
     public ResponseEntity<AuthResponse> register(@RequestBody @Valid AuthCreateUserRequest authCreateUser) {
         return new ResponseEntity<>(this.userDetailService.createUser(authCreateUser), HttpStatus.CREATED);
