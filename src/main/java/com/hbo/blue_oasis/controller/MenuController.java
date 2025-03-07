@@ -52,8 +52,6 @@ public class MenuController {
                 if (oPermissionList.isPresent()) {
 
                     permissionEntityList = oPermissionList.get();
-                    // TODO: Falta agregar el DTO menu
-                    // y hay que hacerlo con el //Patron bukder
                     for (PermissionEntity permission : permissionEntityList) {
                         Menu menu = new Menu(permission.getName(), permission.getPath());
                         menuList.add(menu);

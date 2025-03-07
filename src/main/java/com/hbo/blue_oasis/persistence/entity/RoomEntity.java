@@ -39,11 +39,11 @@ public class RoomEntity implements Serializable {
     private BigDecimal price;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_at")
+    @Column(name = "create_at", nullable = true)
     private Date createAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "update_at")
+    @Column(name = "update_at", nullable = true)
     private Date updateAt;
 
     @OneToMany(fetch = FetchType.LAZY)

@@ -33,11 +33,11 @@ public class ImageRoomEntity implements Serializable {
     private Boolean mainImage;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_at")
+    @Column(name = "create_at", nullable = true)
     private Date createAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "update_at")
+    @Column(name = "update_at", nullable = true)
     private Date updateAt;
 
     @Column(name = "room_id")
