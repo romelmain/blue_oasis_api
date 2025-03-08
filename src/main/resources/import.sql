@@ -1,3 +1,7 @@
+delete FROM room;
+
+ALTER TABLE room AUTO_INCREMENT = 1 ;
+
 INSERT INTO room (number, price, availability, create_at, update_at) VALUES (1,10.05,1,"2025-03-06 1:00:00","2025-03-06 1:00:00");
 INSERT INTO room (number, price, availability, create_at, update_at) VALUES (2,10.05,1,"2025-03-06 1:00:00","2025-03-06 1:00:00");
 INSERT INTO room (number, price, availability, create_at, update_at) VALUES (3,12,1,"2025-03-06 1:00:00","2025-03-06 1:00:00");
