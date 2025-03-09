@@ -38,4 +38,20 @@ public class RoomService {
         return oRoomList;
     }
 
+    public Optional<RoomEntity> getRoomById(Long id) {
+        Optional<RoomEntity> oRoom = null;
+
+        try {
+            oRoom = roomRepository.findById(id);
+            if (!oRoom.isPresent()) {
+                oRoom = Optional.empty();
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            oRoom = Optional.empty();
+        }
+        return oRoom;
+    }
+
 }
