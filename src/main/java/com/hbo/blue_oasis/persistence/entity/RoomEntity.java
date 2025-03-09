@@ -34,6 +34,9 @@ public class RoomEntity implements Serializable {
     private Long id;
 
     @Column(nullable = false, updatable = false)
+    private int number;
+
+    @Column(nullable = false, updatable = false)
     private Boolean availability;
 
     private BigDecimal price;
