@@ -14,8 +14,4 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
     @Query(value = "select * from room", nativeQuery = true)
     ArrayList<RoomEntity> getRoomList();
 
-    /*
-     * @SuppressWarnings({ "null", "rawtypes", "unchecked" })
-     * Optional findById(Long id);
-     */
 }
