@@ -6,6 +6,9 @@ delete from booking_status;
 
 ALTER TABLE booking_status AUTO_INCREMENT = 1 ;
 
+delete from guest;
+ALTER TABLE guest AUTO_INCREMENT = 1 ;
+
 INSERT INTO room (number, price, availability, create_at, update_at) VALUES (1,10.05,1,"2025-03-06 1:00:00","2025-03-06 1:00:00");
 INSERT INTO room (number, price, availability, create_at, update_at) VALUES (2,10.05,1,"2025-03-06 1:00:00","2025-03-06 1:00:00");
 INSERT INTO room (number, price, availability, create_at, update_at) VALUES (3,12,1,"2025-03-06 1:00:00","2025-03-06 1:00:00");
@@ -52,3 +55,4 @@ INSERT INTO booking_status (status, create_at, update_at) VALUES ('Reserved', '2
 INSERT INTO booking_status (status, create_at, update_at) VALUES ('Available', '2025-03-11', '2025-03-11');
 INSERT INTO booking_status (status, create_at, update_at) VALUES ('Check IN Day', '2025-03-11', '2025-03-11');
 INSERT INTO booking_status (status, create_at, update_at) VALUES ('Check OUT Day', '2025-03-11', '2025-03-11');
+
