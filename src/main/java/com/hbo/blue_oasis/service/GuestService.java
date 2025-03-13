@@ -45,6 +45,7 @@ public class GuestService {
         try {
             guestEntityList = guestRepository.findByUserEntity(user);
             if (guestEntityList.size() > 0) {
+                guestEntity = guestEntityList.getFirst();
 
             } else {
                 throw new NullPointerException("User Not Found !!");
