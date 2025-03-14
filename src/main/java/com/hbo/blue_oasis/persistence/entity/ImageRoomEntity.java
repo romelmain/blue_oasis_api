@@ -40,7 +40,4 @@ public class ImageRoomEntity implements Serializable {
     @Column(name = "update_at", nullable = true)
     private Date updateAt;
 
-    @Column(name = "room_id")
-    private int roomId;
-
 }
