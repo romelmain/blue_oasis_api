@@ -21,6 +21,7 @@ import lombok.*;
 @Setter
 @ToString
 @Entity
+@Builder
 @Table(name = "guest")
 public class GuestEntity implements Serializable {
     @Id

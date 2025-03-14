@@ -1,10 +1,14 @@
 package com.hbo.blue_oasis.controller;
 
 import lombok.AllArgsConstructor;
+
+import java.util.Date;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.hbo.blue_oasis.controller.dto.GuestRequest;
 import com.hbo.blue_oasis.persistence.entity.GuestEntity;
 import com.hbo.blue_oasis.persistence.entity.UserEntity;
 import com.hbo.blue_oasis.service.GuestService;
@@ -64,6 +68,30 @@ public class GuestController {
         } catch (Exception e) {
             response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             return response;
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping()
+    public ResponseEntity<?> create(@RequestBody GuestRequest guestRequest) {
+        GuestEntity newGuestEntity = null;
+        GuestEntity guestEntity = null;
+        UserEntity userEntity = null;
+
+        try {
+            userEntity = UserEntity.builder().id(guestRequest.userId()).build();
+            guestEntity = GuestEntity.builder()
+                    .address(guestRequest.address())
+                    .name(guestRequest.name())
+                    .phone(guestRequest.phone())
+                    .lastName(guestRequest.lastname())
+                    .createAt(new Date())
+                    .updateAt(new Date())
+                    .userEntity(userEntity).build();
+            newGuestEntity = guestService.createNewGuest(guestEntity);
+            return new ResponseEntity<>(newGuestEntity, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

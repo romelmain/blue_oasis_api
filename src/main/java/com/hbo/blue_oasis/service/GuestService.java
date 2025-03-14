@@ -57,4 +57,14 @@ public class GuestService {
         return guestEntity;
     }
 
+    public GuestEntity createNewGuest(GuestEntity guestEntity) {
+        GuestEntity newGuest = null;
+        try {
+            newGuest = guestRepository.save(guestEntity);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return guestEntity;
+    }
+
 }
