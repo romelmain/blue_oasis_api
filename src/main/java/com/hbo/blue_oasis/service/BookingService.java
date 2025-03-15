@@ -26,21 +26,14 @@ public class BookingService {
         try {
             newBookingEntity = bookingRepository.save(bookingEntity);
             if (newBookingEntity != null) {
-                System.out.println("AAAAAAAAAAAAAAAAAAAAAAA");
                 oBookingEntity = Optional.of(newBookingEntity);
             } else {
-                System.out.println("BBBBBBBBBBBBBBBBBBBB");
                 oBookingEntity = Optional.empty();
             }
 
         } catch (Exception e) {
-            System.out.println("CCCCCCCCCCCCCCCCCCCC");
-            System.out.println(e.getMessage());
-            System.out.println(e.getCause());
-
             oBookingEntity = Optional.empty();
         }
-
         return oBookingEntity;
 
     }
