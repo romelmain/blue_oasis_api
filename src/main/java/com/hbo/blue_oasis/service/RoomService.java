@@ -1,6 +1,7 @@
 package com.hbo.blue_oasis.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -52,6 +53,23 @@ public class RoomService {
             oRoom = Optional.empty();
         }
         return oRoom;
+    }
+
+    public Optional<ArrayList<RoomEntity>> getRoomListByIds(List<Long> roomIds) {
+        ArrayList<RoomEntity> roomEntityList = null;
+        Optional<ArrayList<RoomEntity>> oRoomEntityList;
+        try {
+            roomEntityList = roomRepository.getRoomListByIds(roomIds);
+            if (roomEntityList.size() > 0) {
+                oRoomEntityList = Optional.of(roomEntityList);
+            } else {
+                oRoomEntityList = Optional.empty();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            oRoomEntityList = Optional.empty();
+        }
+        return oRoomEntityList;
     }
 
 }

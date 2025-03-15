@@ -33,12 +33,13 @@ public class RoomEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = true, updatable = false)
     private int number;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = true, updatable = false)
     private Boolean availability;
 
+    @Column(nullable = true, updatable = false)
     private BigDecimal price;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -50,7 +51,7 @@ public class RoomEntity implements Serializable {
     private Date updateAt;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room_id", nullable = true)
     private List<ImageRoomEntity> imageRoom;
 
 }

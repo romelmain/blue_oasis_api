@@ -1,6 +1,7 @@
 package com.hbo.blue_oasis.persistence.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +27,7 @@ import lombok.*;
 @Setter
 @ToString
 @Entity
+@Builder
 @Table(name = "booking")
 public class BookingEntity implements Serializable {
 
@@ -55,6 +57,6 @@ public class BookingEntity implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "booking_room", joinColumns = @JoinColumn(name = "booking_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
-    private Set<RoomEntity> room = new HashSet<>();
+    private List<RoomEntity> rooms;
 
 }

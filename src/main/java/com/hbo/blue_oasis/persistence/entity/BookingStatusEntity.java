@@ -47,6 +47,6 @@ public class BookingStatusEntity implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id")
-    private List<BookingEntity> imageRoom;
+    private List<BookingEntity> rooms;
 
 }
