@@ -92,19 +92,31 @@ public class GuestController {
         GuestEntity newGuestEntity = null;
         GuestEntity guestEntity = null;
         UserEntity userEntity = null;
-
+        Optional<UserEntity> oUserEntity = null;
+        ResponseEntity<?> response = null;
         try {
-            userEntity = UserEntity.builder().id(guestRequest.userId()).build();
-            guestEntity = GuestEntity.builder()
-                    .address(guestRequest.address())
-                    .name(guestRequest.name())
-                    .phone(guestRequest.phone())
-                    .lastName(guestRequest.lastname())
-                    .createAt(new Date())
-                    .updateAt(new Date())
-                    .userEntity(userEntity).build();
-            newGuestEntity = guestService.createNewGuest(guestEntity);
-            return new ResponseEntity<>(newGuestEntity, HttpStatus.OK);
+
+            oUserEntity = userDetailServiceImpl.getUserByName(guestRequest.username());
+
+            if (oUserEntity.isPresent()) {
+                userEntity = oUserEntity.get();
+                guestEntity = GuestEntity.builder()
+                        .address(guestRequest.address())
+                        .name(guestRequest.name())
+                        .phone(guestRequest.phone())
+                        .lastName(guestRequest.lastname())
+                        .createAt(new Date())
+                        .updateAt(new Date())
+                        .userEntity(userEntity).build();
+                newGuestEntity = guestService.createNewGuest(guestEntity);
+                response = new ResponseEntity<>(newGuestEntity, HttpStatus.CREATED);
+            } else {
+                Optional.empty();
+                response = new ResponseEntity<>("Problems with the User Data", HttpStatus.BAD_REQUEST);
+            }
+
+            return response;
+
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
