@@ -57,6 +57,24 @@ public class GuestService {
         return guestEntity;
     }
 
+    public GuestEntity getGuestByUserName(UserEntity user) {
+        List<GuestEntity> guestEntityList = null;
+        GuestEntity guestEntity = null;
+        try {
+            guestEntityList = guestRepository.findByUserEntity(user);
+            if (guestEntityList.size() > 0) {
+                guestEntity = guestEntityList.getFirst();
+
+            } else {
+                throw new NullPointerException("User Not Found !!");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return guestEntity;
+    }
+
     public GuestEntity createNewGuest(GuestEntity guestEntity) {
         GuestEntity newGuest = null;
         try {
