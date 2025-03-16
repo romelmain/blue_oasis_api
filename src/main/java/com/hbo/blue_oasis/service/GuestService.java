@@ -64,7 +64,7 @@ public class GuestService {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return guestEntity;
+        return newGuest;
     }
 
 }
