@@ -4,10 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 public record BookingRequest(
-        Date createAt, Date updateAt,
-        Date date,
-        Date checkInDate,
-        Date checkOutDate,
-        List<Rooms> roomList) {
+                Date createAt, Date updateAt,
+                Date date,
+                Date checkInDate,
+                Date checkOutDate,
+                Long guestId,
+                List<Rooms> roomList) {
 
 }

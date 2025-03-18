@@ -6,11 +6,11 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -48,9 +48,8 @@ public class GuestEntity implements Serializable {
     @Column(name = "update_at")
     private Date updateAt;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "guest_id", nullable = true)
-    private List<BookingEntity> booking;
+    @OneToMany(mappedBy = "guest")
+    private List<BookingEntity> bookingList;
 
     @OneToOne
     @JoinColumn(name = "user_id")
