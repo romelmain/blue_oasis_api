@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -48,10 +49,6 @@ public class GuestEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_at")
     private Date updateAt;
-
-    @OneToMany
-    @JoinColumn(name = "guest_id")
-    private List<BookingEntity> bookingList;
 
     @OneToOne
     @JoinColumn(name = "user_id")

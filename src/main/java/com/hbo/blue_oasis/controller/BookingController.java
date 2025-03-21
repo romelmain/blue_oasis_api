@@ -43,17 +43,26 @@ public class BookingController {
 
             if (oRoomEntityList.isPresent()) {
                 roomList = oRoomEntityList.get();
+
                 System.out.println("Hay Lista");
 
-                bookingEntity = BookingEntity.builder()
-                        .createAt(bookingRequest.createAt())
-                        .updateAt(bookingRequest.updateAt())
-                        .date(bookingRequest.date())
-                        .checkInDate(bookingRequest.checkInDate())
-                        .checkOutDate(bookingRequest.checkOutDate())
-                        .rooms(roomList)
-                        .guest(bookingRequest.guestId())
-                        .build();
+                if (bookingRequest.bookingId() != null) {
+                    bookingEntity = bookingService.findBookingById(bookingRequest.bookingId());
+                    for (RoomEntity room : roomList) {
+                        bookingEntity.getRooms().add(room);
+                    }
+
+                } else {
+                    bookingEntity = BookingEntity.builder()
+                            .createAt(bookingRequest.createAt())
+                            .updateAt(bookingRequest.updateAt())
+                            .date(bookingRequest.date())
+                            .checkInDate(bookingRequest.checkInDate())
+                            .checkOutDate(bookingRequest.checkOutDate())
+                            .rooms(roomList)
+                            .guest(guestEntity)
+                            .build();
+                }
 
                 oBookingEntity = bookingService.createNewBooking(bookingEntity);
 

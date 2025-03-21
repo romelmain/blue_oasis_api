@@ -24,7 +24,9 @@ public class BookingService {
         Optional<BookingEntity> oBookingEntity = null;
         BookingEntity newBookingEntity = null;
         try {
+
             newBookingEntity = bookingRepository.save(bookingEntity);
+
             if (newBookingEntity != null) {
                 oBookingEntity = Optional.of(newBookingEntity);
             } else {
@@ -36,6 +38,24 @@ public class BookingService {
         }
         return oBookingEntity;
 
+    }
+
+    public BookingEntity findBookingById(Long id) {
+        BookingEntity bookingEntity = null;
+        Optional<BookingEntity> oBookingEntity = null;
+        try {
+            oBookingEntity = bookingRepository.findById(id);
+            if (oBookingEntity.isPresent()) {
+                bookingEntity = oBookingEntity.get();
+            } else {
+                oBookingEntity = Optional.empty();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            oBookingEntity = Optional.empty();
+        }
+
+        return bookingEntity;
     }
 
 }

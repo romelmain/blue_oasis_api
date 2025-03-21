@@ -53,8 +53,9 @@ public class BookingEntity implements Serializable {
     @Column(name = "check_out_date", nullable = true)
     private Date checkOutDate;
 
+    @ManyToOne
     @JoinColumn(name = "guest_id")
-    private Long guest;
+    private GuestEntity guest;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "booking_room", joinColumns = @JoinColumn(name = "booking_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
