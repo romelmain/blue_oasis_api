@@ -52,7 +52,7 @@ public class BookingController {
                         .checkInDate(bookingRequest.checkInDate())
                         .checkOutDate(bookingRequest.checkOutDate())
                         .rooms(roomList)
-                        .guest(guestEntity)
+                        .guest(bookingRequest.guestId())
                         .build();
 
                 oBookingEntity = bookingService.createNewBooking(bookingEntity);
