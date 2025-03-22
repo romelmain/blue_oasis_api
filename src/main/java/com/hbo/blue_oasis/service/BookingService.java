@@ -58,4 +58,18 @@ public class BookingService {
         return bookingEntity;
     }
 
+    public BookingEntity findBookingByGuest(Long guestId) {
+        BookingEntity bookingEntity = null;
+
+        try {
+            bookingEntity = bookingRepository.findBookingByGuest(guestId);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return bookingEntity;
+
+    }
+
 }

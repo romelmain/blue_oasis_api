@@ -87,4 +87,21 @@ public class BookingController {
         }
     }
 
+    @GetMapping("/guest/{id}")
+    public ResponseEntity<?> getBookingByGuest(@PathVariable Long id) {
+        BookingEntity bookingEntity = null;
+        ResponseEntity<?> response = null;
+        try {
+            bookingEntity = bookingService.findBookingByGuest(id);
+            if (bookingEntity != null) {
+                response = new ResponseEntity<>(bookingEntity, HttpStatus.OK);
+            } else {
+                response = new ResponseEntity<>("Booking Not Found", HttpStatus.NOT_FOUND);
+            }
+            return response;
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
