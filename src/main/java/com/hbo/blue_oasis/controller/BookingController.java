@@ -87,6 +87,7 @@ public class BookingController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/guest/{id}")
     public ResponseEntity<?> getBookingByGuest(@PathVariable Long id) {
         BookingEntity bookingEntity = null;
