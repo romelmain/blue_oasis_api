@@ -7,9 +7,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
-
 import com.hbo.blue_oasis.controller.dto.GuestRequest;
 import com.hbo.blue_oasis.persistence.entity.GuestEntity;
 import com.hbo.blue_oasis.persistence.entity.UserEntity;

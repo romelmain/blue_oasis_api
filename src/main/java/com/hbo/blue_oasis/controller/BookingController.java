@@ -90,17 +90,24 @@ public class BookingController {
     @GetMapping("/guest/{id}")
     public ResponseEntity<?> getBookingByGuest(@PathVariable Long id) {
         BookingEntity bookingEntity = null;
+        ArrayList<BookingEntity> bookingEntitieList = null;
         ResponseEntity<?> response = null;
         try {
-            bookingEntity = bookingService.findBookingByGuest(id);
-            if (bookingEntity != null) {
+            bookingEntitieList = bookingService.findBookingByGuest(id);
+            int count = bookingEntitieList.size();
+            if (count == 1) {
+                bookingEntity = bookingEntitieList.getFirst();
                 response = new ResponseEntity<>(bookingEntity, HttpStatus.OK);
-            } else {
+
+            } else if (count > 1) {
+                throw new NullPointerException("Problem: there are more one Booking for this guest !!");
+            } else if (count == 0) {
                 response = new ResponseEntity<>("Booking Not Found", HttpStatus.NOT_FOUND);
             }
+
             return response;
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

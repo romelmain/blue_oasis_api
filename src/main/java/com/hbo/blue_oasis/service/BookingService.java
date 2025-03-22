@@ -1,5 +1,6 @@
 package com.hbo.blue_oasis.service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -58,17 +59,19 @@ public class BookingService {
         return bookingEntity;
     }
 
-    public BookingEntity findBookingByGuest(Long guestId) {
-        BookingEntity bookingEntity = null;
+    public ArrayList<BookingEntity> findBookingByGuest(Long guestId) {
+
+        ArrayList<BookingEntity> bookingEntityList = null;
 
         try {
-            bookingEntity = bookingRepository.findBookingByGuest(guestId);
+            bookingEntityList = bookingRepository.findBookingByGuest(guestId);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+
         }
 
-        return bookingEntity;
+        return bookingEntityList;
 
     }
 
