@@ -57,6 +57,10 @@ public class BookingEntity implements Serializable {
     @JoinColumn(name = "guest_id")
     private GuestEntity guest;
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private BookingStatusEntity status;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "booking_room", joinColumns = @JoinColumn(name = "booking_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
     private List<RoomEntity> rooms;

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.hbo.blue_oasis.controller.dto.BookingRequest;
 import com.hbo.blue_oasis.controller.dto.Rooms;
 import com.hbo.blue_oasis.persistence.entity.BookingEntity;
+import com.hbo.blue_oasis.persistence.entity.BookingStatusEntity;
 import com.hbo.blue_oasis.persistence.entity.GuestEntity;
 import com.hbo.blue_oasis.persistence.entity.RoomEntity;
 import com.hbo.blue_oasis.service.BookingService;
@@ -34,8 +35,9 @@ public class BookingController {
         ArrayList<RoomEntity> roomList = new ArrayList<RoomEntity>();
         List<Long> roomIds = null;
         GuestEntity guestEntity = null;
-        try {
 
+        try {
+            BookingStatusEntity bookingStatusEntity = BookingStatusEntity.builder().id(Long.valueOf(1)).build();
             guestEntity = GuestEntity.builder().id(bookingRequest.guestId()).build();
 
             roomIds = bookingRequest.roomList().stream().map(Rooms::roomId).collect(Collectors.toList());
@@ -60,6 +62,7 @@ public class BookingController {
                             .checkInDate(bookingRequest.checkInDate())
                             .checkOutDate(bookingRequest.checkOutDate())
                             .rooms(roomList)
+                            .status(bookingStatusEntity)
                             .guest(guestEntity)
                             .build();
                 }
