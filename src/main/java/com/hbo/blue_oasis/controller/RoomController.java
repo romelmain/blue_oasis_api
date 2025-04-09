@@ -18,7 +18,7 @@ public class RoomController {
 
     private final RoomService roomService;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = { "http://localhost:4200", "http://localhost" })
     @GetMapping()
     public ResponseEntity<?> getRoomList() {
         ArrayList<RoomEntity> roomList = null;
@@ -36,7 +36,7 @@ public class RoomController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = { "http://localhost:4200", "http://localhost" })
     @GetMapping("/{id}")
     public ResponseEntity<?> getRoomById(@PathVariable Long id) {
         RoomEntity roomEntity = null;
