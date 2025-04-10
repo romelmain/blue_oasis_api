@@ -26,13 +26,13 @@ public class AuthenticationController {
     private UserDetailServiceImpl userDetailService;
 
     // @CrossOrigin(origins = "http://localhost:4200")
-    @CrossOrigin(origins = { "http://localhost:4200", "http://127.0.0.1:5500" })
+    @CrossOrigin(origins = { "${landing.page.uri}" })
     @PostMapping("sign-up")
     public ResponseEntity<AuthResponse> register(@RequestBody @Valid AuthCreateUserRequest authCreateUser) {
         return new ResponseEntity<>(this.userDetailService.createUser(authCreateUser), HttpStatus.CREATED);
     }
 
-    @CrossOrigin(origins = { "http://localhost:4200", "http://localhost" })
+    @CrossOrigin(origins = { "${BLUE_OASIS_APP}" })
     @PostMapping("/log-in")
     @Operation(summary = "Login User", description = "Authenticate a user and return the authentication token along with user details.", tags = {
             "Authentication" }, requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Authentication request with username and password", required = true, content = @Content(mediaType = "application/json", schema = @Schema(implementation = AuthLoginRequest.class))), responses = {

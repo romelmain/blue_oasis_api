@@ -27,7 +27,7 @@ public class MenuController {
 
     private final PermissionService permissionService;
 
-    @CrossOrigin(origins = { "http://localhost:4200", "http://localhost" })
+    @CrossOrigin(origins = { "${BLUE_OASIS_APP}" })
     @GetMapping()
     public ResponseEntity<?> getMenu(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
 

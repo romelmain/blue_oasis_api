@@ -33,7 +33,7 @@ public class GuestController {
         }
     }
 
-    @CrossOrigin(origins = { "http://localhost:4200", "http://localhost" })
+    @CrossOrigin(origins = { "${BLUE_OASIS_APP}" })
     @GetMapping("/{id}")
     public ResponseEntity<?> getGuestById(@PathVariable Long id) {
         GuestEntity guestEntity = null;
@@ -52,7 +52,7 @@ public class GuestController {
         }
     }
 
-    @CrossOrigin(origins = { "http://localhost:4200", "http://localhost" })
+    @CrossOrigin(origins = { "${BLUE_OASIS_APP}" })
     @GetMapping("/user/{username}")
     public ResponseEntity<?> getGuestByUserName(@PathVariable String username) {
         GuestEntity guestEntity = null;
@@ -84,7 +84,7 @@ public class GuestController {
         }
     }
 
-    @CrossOrigin(origins = { "http://localhost:4200", "http://localhost" })
+    @CrossOrigin(origins = { "${BLUE_OASIS_APP}" })
     @PostMapping()
     public ResponseEntity<?> create(@RequestBody GuestRequest guestRequest) {
         GuestEntity newGuestEntity = null;

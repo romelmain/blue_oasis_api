@@ -25,7 +25,7 @@ public class BookingController {
     private final BookingService bookingService;
     private final RoomService roomService;
 
-    @CrossOrigin(origins = { "http://localhost:4200", "http://localhost" })
+    @CrossOrigin(origins = { "${BLUE_OASIS_APP}" })
     @PostMapping()
     public ResponseEntity<?> create(@RequestBody BookingRequest bookingRequest) {
         Optional<BookingEntity> oBookingEntity = null;
@@ -87,7 +87,7 @@ public class BookingController {
         }
     }
 
-    @CrossOrigin(origins = { "http://localhost:4200", "http://localhost" })
+    @CrossOrigin(origins = { "${BLUE_OASIS_APP}" })
     @GetMapping("/guest/{id}")
     public ResponseEntity<?> getBookingByGuest(@PathVariable Long id) {
         BookingEntity bookingEntity = null;
