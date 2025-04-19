@@ -120,6 +120,7 @@
                         <filtering>true</filtering>
                         <includes>
                             <include>application-dev.properties</include>
+							<include>keystore.p12</include>
                         </includes>
                     </resource>
                 </resources>
@@ -143,6 +144,7 @@
                         <filtering>true</filtering>
                         <includes>
                             <include>application-stg.properties</include>
+							<include>keystore.p12</include>
                         </includes>
                     </resource>
                 </resources>
@@ -165,6 +167,7 @@
                         <filtering>true</filtering>
                         <includes>
                             <include>application-prod.properties</include>
+							<include>keystore.p12</include>
                         </includes>
                     </resource>
                 </resources>
@@ -208,6 +211,18 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
+					<configuration>
+						<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>pem</nonFilteredFileExtension>
+						<nonFilteredFileExtension>p12</nonFilteredFileExtension>
+						<nonFilteredFileExtension>jks</nonFilteredFileExtension>
+						</nonFilteredFileExtensions>
+					</configuration>
 			</plugin>
 		</plugins>
 	</build>
