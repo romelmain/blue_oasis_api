@@ -9,22 +9,30 @@ blue_oasis_api: Api developed in Spring Boot in order to create reservations, ch
 - mvn clean
 - mvn install
 
-### Normal con perfiles
+### Normal con perfiles y encriptando claves
 
 - mvn clean
 
 ### Para desarrollo
 
-- mvn install -Pdev
+- mvn jasypt:encrypt "-Djasypt.encryptor.password=[aqui va la clave]" "-Djasypt.plugin.path=file:src/main/resources/application-dev.properties"
+
+- mvn -DskipTests clean install -Pdev
+
+- java -jar "-Djasypt.encryptor.password=[aqui va la clave]" "-Djasypt.plugin.path=file:src/main/resources/application-dev.properties" target/blue_oasis-0.0.1-SNAPSHOT.jar
 
 ### Para QA
 
-- mvn install -Pstg
+- mvn jasypt:encrypt "-Djasypt.encryptor.password=[aqui va la clave]" "-Djasypt.plugin.path=file:src/main/resources/application-stg.properties"
+
+- mvn -DskipTests clean install -Pstg
+
+- java -jar "-Djasypt.encryptor.password=[aqui va la clave]" "-Djasypt.plugin.path=file:src/main/resources/application-stg.properties" target/blue_oasis-0.0.1-SNAPSHOT.jar
 
 ### Para Produccion
 
-- mvn install -Pprod
+- mvn jasypt:encrypt "-Djasypt.encryptor.password=[aqui va la clave]" "-Djasypt.plugin.path=file:src/main/resources/application-prod.properties"
 
-### Para Ejecutar
+- mvn -DskipTests clean install -Pprod
 
-- java -jar target\blue_oasis-0.0.1-SNAPSHOT.jar
+- java -jar "-Djasypt.encryptor.password=[aqui va la clave]" "-Djasypt.plugin.path=file:src/main/resources/application-prod.properties" target/blue_oasis-0.0.1-SNAPSHOT.jar
